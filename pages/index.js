@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import products from "../products.json";
+import { initiateCheckout } from "@/lib/payments";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center}>
-          <h1 width={180} height={37} priority className={styles.mainTitle}>
+          <h1 width={180} height={37} className={styles.mainTitle}>
             Space Jelly Shop
           </h1>
           <p className={inter.className}>
@@ -29,11 +30,7 @@ export default function Home() {
             const { title, price, image, description, id } = product;
             return (
               <li className={styles.card} key={id}>
-                <a
-                  href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <div>
                   <img src={image} alt={title} style={{ maxWidth: "100%" }} />
                   <h2 className={inter.className}>
                     {title}
@@ -41,7 +38,23 @@ export default function Home() {
                   </h2>
                   <p>${price}</p>
                   <p className={inter.className}>{description}</p>
-                </a>
+
+                  <button
+                    className={styles.button}
+                    onClick={() => {
+                      initiateCheckout({
+                        lineItems: [
+                          {
+                            price: id,
+                            quantity: 1,
+                          },
+                        ],
+                      });
+                    }}
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </li>
             );
           })}
