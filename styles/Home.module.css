@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 1rem 6rem;
   min-height: 100vh;
 }
 
@@ -32,6 +32,11 @@
   background-color: rgba(var(--callout-rgb), 0.5);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+.subtitles {
+  margin-bottom: 20px;
 }
 
 .code {
@@ -49,7 +54,7 @@
 
 .mainTitle {
   font-family: Arial, Helvetica, sans-serif;
-  color: 'black'
+  color: 'black';
 }
 
 .card {
@@ -78,9 +83,11 @@
   font-size: 0.9rem;
   line-height: 1.5;
   max-width: 30ch;
+  margin-bottom: 20px;
 }
 
 .center {
+  font-family: 'Roboto', 'sans-serif';
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,7 +99,7 @@
 .button {
   color: white;
   font-family: 'Roboto', 'sans-serif';
-  font-size: 1.4em;
+  font-size: 1em;
   font-weight: 700;
   background-color: blueviolet;
   padding: .8em 1.4em;

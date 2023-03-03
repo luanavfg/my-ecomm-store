@@ -24,6 +24,13 @@ export default function Home() {
           <p className={inter.className}>
             The best space jellyfish swag on the universe!
           </p>
+          <p className={inter.className}>
+            <strong className={styles.subtitles}>Items:</strong> 2
+            <br />
+            <strong className={styles.subtitles}>Total Cost:</strong> $20
+            <br />
+            <button className={styles.button}>Check Out</button>
+          </p>
         </div>
         <ul className={styles.grid}>
           {products.map((product) => {
