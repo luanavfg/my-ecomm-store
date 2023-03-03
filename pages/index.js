@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import products from "../products.json";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,99 +16,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        {/* <div className={styles.description}> */}
-        {/* <p>
-            Space Jelly Shop&nbsp; */}
-        {/* <code className={styles.code}>pages/index.js</code> */}
-        {/* </p> */}
-        {/* <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{" "}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div> */}
-        {/* </div> */}
-
         <div className={styles.center}>
           <h1 width={180} height={37} priority className={styles.mainTitle}>
             Space Jelly Shop
           </h1>
           <p className={inter.className}>
-            The best space jellyfish swag on the web
+            The best space jellyfish swag on the universe!
           </p>
         </div>
-
         <ul className={styles.grid}>
-          <li className={styles.card}>
-            <a
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/spacejelly-tshirt.jpg"
-                alt="Space Jelly Tshirt"
-                style={{ maxWidth: "100%" }}
-              />
-              <h2 className={inter.className}>
-                Space Jelly Tshirt <span>-&gt;</span>
-              </h2>
-              <p className={inter.className}>
-                Bring Cosmo the space Jellyfish to your wardrobe with this high
-                quality tshirt.
-              </p>
-            </a>
-          </li>
-          <li className={styles.card}>
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/spacejelly-stickers.jpg"
-                alt="Space Jelly Stickers"
-                style={{ maxWidth: "100%" }}
-              />
-              <h2 className={inter.className}>
-                Space Jelly Stickers<span>-&gt;</span>
-              </h2>
-              <p className={inter.className}>
-                Add some flare to your laptop with a sticker of Cosmo the Space
-                Jellyfish.
-              </p>
-            </a>
-          </li>
-          <li className={styles.card}>
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/images/spacejelly-combo.jpg"
-                alt="Space Jelly Combo"
-                style={{ maxWidth: "100%" }}
-              />
-              <h2 className={inter.className}>
-                Space Jelly Combo<span>-&gt;</span>
-              </h2>
-              <p className={inter.className}>
-                Show your love for Cosmo with a tshirt and sticker combo pack!
-              </p>
-            </a>
-          </li>
+          {products.map((product) => {
+            const { title, price, image, description, id } = product;
+            return (
+              <li className={styles.card} key={id}>
+                <a
+                  href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={image} alt={title} style={{ maxWidth: "100%" }} />
+                  <h2 className={inter.className}>
+                    {title}
+                    <span>-&gt;</span>
+                  </h2>
+                  <p>${price}</p>
+                  <p className={inter.className}>{description}</p>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </main>
     </>
