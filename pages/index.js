@@ -4,10 +4,63 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import products from "../products.json";
 import { initiateCheckout } from "@/lib/payments";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
+const defaultCart = {
+  products: {},
+};
 
 export default function Home() {
+  const [cart, updateCart] = useState(defaultCart);
+
+  const cartItems = Object.keys(cart.products).map((key) => {
+    const product = products.find(({ id }) => `${id}` === `${key}`);
+    return {
+      ...cart.products[key],
+      pricePerItem: product.price,
+    };
+  });
+
+  const subtotal = cartItems.reduce(
+    (accumulator, { pricePerItem, quantity }) => {
+      return accumulator + pricePerItem * quantity;
+    },
+    0
+  );
+
+  const totalItems = cartItems.reduce((accumulator, { quantity }) => {
+    return accumulator + quantity;
+  }, 0);
+
+  function addToCart({ id } = {}) {
+    updateCart((prev) => {
+      let cartState = { ...prev };
+
+      if (cartState.products[id]) {
+        cartState.products[id].quantity = cartState.products[id].quantity + 1;
+      } else {
+        cartState.products[id] = {
+          id,
+          quantity: 1,
+        };
+      }
+
+      return cartState;
+    });
+  }
+
+  function checkOut() {
+    initiateCheckout({
+      lineItems: cartItems.map((item) => {
+        return {
+          price: item.id,
+          quantity: item.quantity,
+        };
+      }),
+    });
+  }
+
   return (
     <>
       <Head>
@@ -25,11 +78,14 @@ export default function Home() {
             The best space jellyfish swag on the universe!
           </p>
           <p className={inter.className}>
-            <strong className={styles.subtitles}>Items:</strong> 2
+            <strong className={styles.subtitles}>Items:</strong> {totalItems}
             <br />
-            <strong className={styles.subtitles}>Total Cost:</strong> $20
+            <strong className={styles.subtitles}>Total Cost:</strong> $
+            {subtotal}
             <br />
-            <button className={styles.button}>Check Out</button>
+            <button className={styles.button} onClick={checkOut}>
+              Check Out
+            </button>
           </p>
         </div>
         <ul className={styles.grid}>
@@ -49,17 +105,12 @@ export default function Home() {
                   <button
                     className={styles.button}
                     onClick={() => {
-                      initiateCheckout({
-                        lineItems: [
-                          {
-                            price: id,
-                            quantity: 1,
-                          },
-                        ],
+                      addToCart({
+                        id,
                       });
                     }}
                   >
-                    Buy Now
+                    Add to Cart
                   </button>
                 </div>
               </li>
