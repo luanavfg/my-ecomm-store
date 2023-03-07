@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import products from "../products.json";
-import useCart from "@/hooks/use-cart";
+import { useCart } from "@/hooks/use-cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,16 +25,6 @@ export default function Home() {
           </h1>
           <p className={inter.className}>
             The best space jellyfish swag on the universe!
-          </p>
-          <p className={inter.className}>
-            <strong className={styles.subtitles}>Items:</strong> {totalItems}
-            <br />
-            <strong className={styles.subtitles}>Total Cost:</strong> $
-            {subtotal}
-            <br />
-            <button className={styles.button} onClick={checkOut}>
-              Check Out
-            </button>
           </p>
         </div>
         <ul className={styles.grid}>
