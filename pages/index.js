@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import products from "../products.json";
 import { useCart } from "@/hooks/use-cart";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,7 +33,7 @@ export default function Home() {
             const { title, price, image, description, id } = product;
             return (
               <li className={styles.card} key={id}>
-                <div>
+                <Link href={`/products/${id}`}>
                   <img src={image} alt={title} style={{ maxWidth: "100%" }} />
                   <h2 className={inter.className}>
                     {title}
@@ -40,7 +41,8 @@ export default function Home() {
                   </h2>
                   <p>${price}</p>
                   <p className={inter.className}>{description}</p>
-
+                </Link>
+                <p>
                   <button
                     className={styles.button}
                     onClick={() => {
@@ -51,7 +53,7 @@ export default function Home() {
                   >
                     Add to Cart
                   </button>
-                </div>
+                </p>
               </li>
             );
           })}

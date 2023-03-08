@@ -1,9 +1,12 @@
 import Head from "next/head";
 import styles from "../../styles/Product.module.css";
 import products from "../../products.json";
+import { useCart } from "@/hooks/use-cart";
 
 export default function Product({ product }) {
   const { id, title, description, image, price } = product;
+
+  const { addToCart } = useCart();
 
   return (
     <div className={styles.container}>
@@ -24,7 +27,16 @@ export default function Product({ product }) {
 
           <p className={styles.description}>${price.toFixed(2)}</p>
           <p>
-            <button className={styles.button}>Buy</button>
+            <button
+              className={styles.button}
+              onClick={() => {
+                addToCart({
+                  id,
+                });
+              }}
+            >
+              Buy
+            </button>
           </p>
         </div>
       </main>
