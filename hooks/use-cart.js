@@ -60,6 +60,18 @@ export function useCartState() {
     });
   }
 
+  function updateItem({ id, quantity }) {
+    updateCart((prev) => {
+      let cart = { ...prev };
+
+      if (cart.products[id]) {
+        cart.products[id].quantity = quantity;
+      }
+
+      return cart;
+    });
+  }
+
   function checkout() {
     initiateCheckout({
       lineItems: cartItems.map((item) => {
@@ -75,6 +87,7 @@ export function useCartState() {
     cart,
     cartItems,
     updateCart,
+    updateItem,
     subtotal,
     totalItems,
     addToCart,
