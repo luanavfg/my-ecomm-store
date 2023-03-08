@@ -1,17 +1,21 @@
 import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from "@/hooks/use-cart";
+import { useCart, checkout } from "@/hooks/use-cart";
 
 import styles from "./Nav.module.css";
+import Link from "next/link";
 
 const Nav = () => {
-  const { subtotal, checkOut } = useCart();
+  const { subtotal, checkout } = useCart();
   return (
     <nav className={styles.nav}>
-      <p className={styles.navTitle}>Space Jelly Shop</p>
+      <Link href="/">
+        <p className={styles.navTitle}>Space Jelly Shop</p>
+      </Link>
+
       <p className={styles.navCart}>
-        <button onClick={checkOut}>
+        <Link href="/cart">
           <FaShoppingCart /> ${subtotal}
-        </button>
+        </Link>
       </p>
     </nav>
   );

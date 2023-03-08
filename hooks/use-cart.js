@@ -60,7 +60,7 @@ export function useCartState() {
     });
   }
 
-  function checkOut() {
+  function checkout() {
     initiateCheckout({
       lineItems: cartItems.map((item) => {
         return {
@@ -73,11 +73,12 @@ export function useCartState() {
 
   return {
     cart,
+    cartItems,
     updateCart,
     subtotal,
     totalItems,
     addToCart,
-    checkOut,
+    checkout,
   };
 }
 

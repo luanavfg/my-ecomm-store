@@ -9,7 +9,7 @@ import Link from "next/link";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { subtotal, totalItems, addToCart, checkOut } = useCart();
+  const { subtotal, totalItems, addToCart, checkout } = useCart();
 
   return (
     <>
